@@ -1,32 +1,32 @@
-import { apiGet, apiPost, apiPut, apiDelete } from './client'
+import { apiGet, apiPost, apiPut, apiDelete } from "./client";
 
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 
 export interface Person {
-  id:           string
-  name:         string
-  role:         string
-  registeredAt: string
-  updatedAt:    string
+  id: string;
+  name: string;
+  role: string;
+  registeredAt: string;
+  updatedAt: string;
 }
 
 // Full person returned by GET /api/persons (includes face for AI engine)
 export interface PersonWithFace extends Person {
-  face_image_b64: string
+  face_image_b64: string;
 }
 
 export interface CreatePersonRequest {
-  name:         string
-  role:         string
-  faceImageB64: string
+  name: string;
+  role: string;
+  faceImageB64: string;
 }
 
 export interface UpdatePersonRequest {
-  name?:         string
-  role?:         string
-  faceImageB64?: string
+  name?: string;
+  role?: string;
+  faceImageB64?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -39,7 +39,7 @@ export interface UpdatePersonRequest {
  * Public — no auth required (also used by AI engine).
  */
 export async function getPersons(): Promise<PersonWithFace[]> {
-  return apiGet<PersonWithFace[]>('/api/persons')
+  return apiGet<PersonWithFace[]>("/api/persons");
 }
 
 /**
@@ -47,7 +47,7 @@ export async function getPersons(): Promise<PersonWithFace[]> {
  * Returns a single person by ID.
  */
 export async function getPersonById(id: string): Promise<{ person: Person }> {
-  return apiGet<{ person: Person }>(`/api/persons/${id}`)
+  return apiGet<{ person: Person }>(`/api/persons/${id}`);
 }
 
 /**
@@ -58,7 +58,7 @@ export async function getPersonById(id: string): Promise<{ person: Person }> {
 export async function createPerson(
   data: CreatePersonRequest,
 ): Promise<{ message: string; person: Person }> {
-  return apiPost<{ message: string; person: Person }>('/api/persons', data)
+  return apiPost<{ message: string; person: Person }>("/api/persons", data);
 }
 
 /**
@@ -70,7 +70,10 @@ export async function updatePerson(
   id: string,
   data: UpdatePersonRequest,
 ): Promise<{ message: string; person: Person }> {
-  return apiPut<{ message: string; person: Person }>(`/api/persons/${id}`, data)
+  return apiPut<{ message: string; person: Person }>(
+    `/api/persons/${id}`,
+    data,
+  );
 }
 
 /**
@@ -78,10 +81,8 @@ export async function updatePerson(
  * Remove a registered person.
  * Requires ADMIN role JWT.
  */
-export async function deletePerson(
-  id: string,
-): Promise<{ message: string }> {
-  return apiDelete<{ message: string }>(`/api/persons/${id}`)
+export async function deletePerson(id: string): Promise<{ message: string }> {
+  return apiDelete<{ message: string }>(`/api/persons/${id}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -90,9 +91,9 @@ export async function deletePerson(
 
 export function fileToBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onload  = () => resolve((reader.result as string).split(',')[1])
-    reader.onerror = () => reject(new Error('Failed to read file'))
-    reader.readAsDataURL(file)
-  })
+    const reader = new FileReader();
+    reader.onload = () => resolve((reader.result as string).split(",")[1]);
+    reader.onerror = () => reject(new Error("Failed to read file"));
+    reader.readAsDataURL(file);
+  });
 }

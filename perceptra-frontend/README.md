@@ -56,37 +56,37 @@ npm run preview
 
 ## Routes
 
-| Path | Page | Auth Required |
-|---|---|---|
-| `/` | Landing | No |
-| `/login` | Login | No |
-| `/signup` | Sign Up | No |
-| `/reset-password` | Reset Password | No |
-| `/verify` | Verify Identity | No |
-| `/live-feed` | Live Feed Dashboard | Yes |
-| `/alerts` | Alerts Center | Yes |
-| `/analytics` | Analytics & Reports | Yes |
-| `/settings` | Settings | Yes |
+| Path              | Page                | Auth Required |
+| ----------------- | ------------------- | ------------- |
+| `/`               | Landing             | No            |
+| `/login`          | Login               | No            |
+| `/signup`         | Sign Up             | No            |
+| `/reset-password` | Reset Password      | No            |
+| `/verify`         | Verify Identity     | No            |
+| `/live-feed`      | Live Feed Dashboard | Yes           |
+| `/alerts`         | Alerts Center       | Yes           |
+| `/analytics`      | Analytics & Reports | Yes           |
+| `/settings`       | Settings            | Yes           |
 
 ## API Integration
 
 All pages use typed data constants and React state patterns designed for straightforward API wiring. Integration points:
 
-| Page | Endpoint | Method |
-|---|---|---|
-| Login | `/api/auth/login` | POST |
-| Signup | `/api/auth/register` | POST |
-| Live Feed | `/api/events` + `WS /ws/detections` | GET + WebSocket |
-| Alerts | `/api/alerts` + `/api/alerts/:id/dismiss` | GET + PATCH |
-| Analytics | `/api/reports` + `/api/events` | GET |
+| Page      | Endpoint                                  | Method          |
+| --------- | ----------------------------------------- | --------------- |
+| Login     | `/api/auth/login`                         | POST            |
+| Signup    | `/api/auth/register`                      | POST            |
+| Live Feed | `/api/events` + `WS /ws/detections`       | GET + WebSocket |
+| Alerts    | `/api/alerts` + `/api/alerts/:id/dismiss` | GET + PATCH     |
+| Analytics | `/api/reports` + `/api/events`            | GET             |
 
 **Severity colour scale** (matches backend contract):
 
-| Level | Colour | Hex |
-|---|---|---|
-| Low | Green | `#22C55E` |
-| Medium | Amber | `#F59E0B` |
-| High | Red | `#EF4444` |
+| Level    | Colour | Hex       |
+| -------- | ------ | --------- |
+| Low      | Green  | `#22C55E` |
+| Medium   | Amber  | `#F59E0B` |
+| High     | Red    | `#EF4444` |
 | Critical | Purple | `#7C3AED` |
 
 ## Environment Variables

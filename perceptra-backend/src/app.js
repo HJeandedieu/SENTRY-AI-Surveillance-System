@@ -19,6 +19,7 @@ app.use(cors({
   origin: [
     'https://perceptra-phi.vercel.app',
     'http://localhost:5173',
+    '*'
   ],
   credentials: true,
 }))

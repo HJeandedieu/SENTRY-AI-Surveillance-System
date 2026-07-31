@@ -238,6 +238,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://perceptra-phi.vercel.app",
+        "https://perceptra.onrender.com/"
         "http://localhost:5173",
         "*",
     ],

@@ -1,4 +1,5 @@
 # threat/classifier.py
+import time
 from threat.rules import get_severity
 from threat.loiter import LoiterTracker
 
@@ -11,6 +12,7 @@ class ThreatClassifier:
 
     def __init__(self):
         self._loiter = LoiterTracker()
+        self._last_reset = time.time()
 
     def classify(self, detections: list[dict]) -> list[dict]:
         """
@@ -26,6 +28,11 @@ class ThreatClassifier:
                 "identity":       str | None  (passthrough if present)
                 "name":           str | None  (passthrough if present)
         """
+        
+        if time.time() - self._last_reset > 1800:
+            self._loiter = LoiterTracker()
+            self._last_reset = time.time()
+        
         classified = []
 
         for det in detections:

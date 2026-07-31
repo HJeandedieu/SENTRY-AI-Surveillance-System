@@ -2,7 +2,9 @@ import cv2
 from flask import Flask, Response
 
 app = Flask(__name__)
-cap = cv2.VideoCapture(1)  # try 1 instead of 0
+cap = cv2.VideoCapture(1)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
 def generate():
     while True:
